@@ -2,9 +2,9 @@ package com.example.ruben.filereader.presenter;
 
 public interface SubscribeCallback {
 
-    void onNext();
+    void onNext(String word);
 
-    void onError();
+    void onError(Throwable error);
 
     void onComplete();
 
