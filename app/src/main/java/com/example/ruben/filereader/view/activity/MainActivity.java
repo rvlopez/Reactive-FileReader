@@ -3,9 +3,13 @@ package com.example.ruben.filereader.view.activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.ruben.filereader.ApplicationConstants;
 import com.example.ruben.filereader.R;
 import com.example.ruben.filereader.presenter.Presenter;
 import com.example.ruben.filereader.view.adapter.FileReaderAdapter;
@@ -33,18 +37,15 @@ public class MainActivity extends RootActivity implements FileReaderView {
 
     @Override
     public void showData(Map<String, Integer> wordsMap) {
+        showNoResults.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
         adapter.setWordsMap(wordsMap);
     }
 
     @Override
-    public void showError() {
-
-    }
-
-    @Override
-    public void showNoResults() {
-
+    public void showError(Throwable error) {
+        showNoResults.setVisibility(View.VISIBLE);
+        showNoResults.setText(error.getMessage());
     }
 
     @Override
@@ -67,6 +68,27 @@ public class MainActivity extends RootActivity implements FileReaderView {
     @Override
     protected void initializePresenter() {
         presenter.setView(this);
-        presenter.start();
+        presenter.start(ApplicationConstants.LIGHT_FILE);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_activity_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.light_file:
+                presenter.start(ApplicationConstants.LIGHT_FILE);
+                return true;
+            case R.id.heavy_file:
+                presenter.start(ApplicationConstants.HEAVY_FILE);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

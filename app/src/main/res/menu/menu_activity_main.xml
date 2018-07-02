@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/light_file"
+        android:title="@string/light_file"/>
+    <item android:id="@+id/heavy_file"
+        android:title="@string/heavy_file"/>
+</menu>
