@@ -6,7 +6,5 @@ public interface FileReaderView extends IView {
 
     void showData(Map<String, Integer> wordsMap);
 
-    void showError();
-
-    void showNoResults();
+    void showError(Throwable error);
 }

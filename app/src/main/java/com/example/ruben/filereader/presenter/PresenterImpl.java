@@ -33,7 +33,7 @@ public class PresenterImpl extends Presenter<FileReaderView> implements Subscrib
 
     @Override
     public void onError(Throwable error) {
-        view.showError();
+        view.showError(error);
     }
 
     @Override

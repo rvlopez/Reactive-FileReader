@@ -20,7 +20,7 @@ public class FileReaderDataSource {
                     }
                     emitter.onComplete();
                 },
-                reader -> reader.close()
+                BufferedReader::close
         );
     }
 }
