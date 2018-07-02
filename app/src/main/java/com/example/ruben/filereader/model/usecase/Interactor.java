@@ -17,8 +17,8 @@ public abstract class Interactor {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(
-                        nextEvent -> {subscribeCallback.onNext();},
-                        error -> {subscribeCallback.onError();},
+                        subscribeCallback::onNext,  //  nextEvent -> {subscribeCallback.onNext(nextEvent);}
+                        subscribeCallback::onError, //error -> {subscribeCallback.onError(error);}
                         subscribeCallback::onComplete);
     }
 
