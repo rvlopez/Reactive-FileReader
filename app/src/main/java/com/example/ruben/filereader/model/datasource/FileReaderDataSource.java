@@ -3,9 +3,15 @@ package com.example.ruben.filereader.model.datasource;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
+import javax.inject.Inject;
+
 import io.reactivex.Flowable;
 
 public class FileReaderDataSource {
+
+    @Inject
+    public FileReaderDataSource() {
+    }
 
     public Flowable<String> read(String filePath) {
         return Flowable.generate(

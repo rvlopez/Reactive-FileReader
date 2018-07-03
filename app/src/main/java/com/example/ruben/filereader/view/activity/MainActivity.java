@@ -10,7 +10,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.ruben.filereader.ApplicationConstants;
+import com.example.ruben.filereader.FileReaderApplication;
 import com.example.ruben.filereader.R;
+import com.example.ruben.filereader.di.FileReaderComponent;
+import com.example.ruben.filereader.di.FileReaderModule;
 import com.example.ruben.filereader.presenter.Presenter;
 import com.example.ruben.filereader.view.adapter.FileReaderAdapter;
 import com.example.ruben.filereader.view.FileReaderView;
@@ -23,8 +26,8 @@ import butterknife.BindView;
 
 public class MainActivity extends RootActivity implements FileReaderView {
 
-    @Inject private FileReaderAdapter adapter;
-    @Inject private Presenter<FileReaderView> presenter;
+    @Inject FileReaderAdapter adapter;
+    @Inject Presenter<FileReaderView> presenter;
 
     @BindView(R.id.showNoResults) TextView showNoResults;
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
@@ -55,7 +58,9 @@ public class MainActivity extends RootActivity implements FileReaderView {
 
     @Override
     protected void initializeInjector() {
-
+        FileReaderComponent fileReaderComponent = ((FileReaderApplication) getApplication())
+                .getComponent().fileReaderComponent(new FileReaderModule());
+        fileReaderComponent.inject(this);
     }
 
     @Override
