@@ -1,6 +1,5 @@
 package com.example.ruben.filereader.view.activity;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -9,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.ruben.filereader.ApplicationConstants;
 import com.example.ruben.filereader.FileReaderApplication;
 import com.example.ruben.filereader.R;
 import com.example.ruben.filereader.StreamUtils;
@@ -19,7 +17,6 @@ import com.example.ruben.filereader.presenter.Presenter;
 import com.example.ruben.filereader.view.adapter.FileReaderAdapter;
 import com.example.ruben.filereader.view.FileReaderView;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
@@ -34,12 +31,6 @@ public class MainActivity extends RootActivity implements FileReaderView {
 
     @BindView(R.id.showNoResults) TextView showNoResults;
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
 
     @Override
     public void showData(Map<String, Integer> wordsMap) {
