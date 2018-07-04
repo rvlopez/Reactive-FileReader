@@ -22,6 +22,7 @@ public class FileReaderDataSource {
             if (line != null) {
                 String[] splitted = line.split("\\s+");
                 for (String word : splitted) {
+                    Thread.sleep(1000);
                     emitter.onNext(word);
                 }
                 emitter.onComplete();

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FileReader</string>
+    <string name="app_name">Reactive FileReader</string>
 
     <string name="light_file">Load light file</string>
     <string name="heavy_file">Load heavy file</string>
