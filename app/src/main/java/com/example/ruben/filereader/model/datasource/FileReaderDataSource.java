@@ -1,6 +1,7 @@
 package com.example.ruben.filereader.model.datasource;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 
 import javax.inject.Inject;
@@ -13,18 +14,19 @@ public class FileReaderDataSource {
     public FileReaderDataSource() {
     }
 
-    public Flowable<String> read(String filePath) {
+    public Flowable<String> read(File file) {
         return Flowable.generate(
-                () -> new BufferedReader(new FileReader(filePath)),
+                () -> new BufferedReader(new FileReader(file)),
                 (reader, emitter) -> {
                     final String line = reader.readLine();
-                    while (line != null) {
+                    if (line != null) {
                         String[] splitted = line.split("\\s+");
                         for (String word : splitted) {
                             emitter.onNext(word);
                         }
+                    } else {
+                        emitter.onComplete();
                     }
-                    emitter.onComplete();
                 },
                 BufferedReader::close
         );

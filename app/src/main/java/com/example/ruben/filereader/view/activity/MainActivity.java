@@ -12,12 +12,15 @@ import android.widget.TextView;
 import com.example.ruben.filereader.ApplicationConstants;
 import com.example.ruben.filereader.FileReaderApplication;
 import com.example.ruben.filereader.R;
+import com.example.ruben.filereader.StreamUtils;
 import com.example.ruben.filereader.di.FileReaderComponent;
 import com.example.ruben.filereader.di.FileReaderModule;
 import com.example.ruben.filereader.presenter.Presenter;
 import com.example.ruben.filereader.view.adapter.FileReaderAdapter;
 import com.example.ruben.filereader.view.FileReaderView;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -47,6 +50,7 @@ public class MainActivity extends RootActivity implements FileReaderView {
 
     @Override
     public void showError(Throwable error) {
+        recyclerView.setVisibility(View.GONE);
         showNoResults.setVisibility(View.VISIBLE);
         showNoResults.setText(error.getMessage());
     }
@@ -73,7 +77,12 @@ public class MainActivity extends RootActivity implements FileReaderView {
     @Override
     protected void initializePresenter() {
         presenter.setView(this);
-        presenter.start(ApplicationConstants.LIGHT_FILE);
+        try {
+            presenter.start(StreamUtils.streamToFile(
+                    getResources().openRawResource(R.raw.light_file)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -87,10 +96,20 @@ public class MainActivity extends RootActivity implements FileReaderView {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.light_file:
-                presenter.start(ApplicationConstants.LIGHT_FILE);
+                try {
+                    presenter.start(StreamUtils.streamToFile(
+                            getResources().openRawResource(R.raw.light_file)));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 return true;
             case R.id.heavy_file:
-                presenter.start(ApplicationConstants.HEAVY_FILE);
+                try {
+                    presenter.start(StreamUtils.streamToFile(
+                            getResources().openRawResource(R.raw.heavy_file)));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

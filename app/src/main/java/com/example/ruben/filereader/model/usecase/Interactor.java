@@ -1,6 +1,6 @@
 package com.example.ruben.filereader.model.usecase;
 
-import com.example.ruben.filereader.presenter.SubscribeCallback;
+import java.io.File;
 
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -12,16 +12,16 @@ public abstract class Interactor {
 
     protected Disposable disposable = Disposables.empty();
 
-    public void execute(String filePath, SubscribeCallback subscribeCallback) {
-        disposable = buildObservable(filePath)
+    public void execute(File file, SubscribeCallback subscribeCallback) {
+        disposable = buildObservable(file)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(
-                        subscribeCallback::onNext,  //  nextEvent -> {subscribeCallback.onNext(nextEvent);}
-                        subscribeCallback::onError, //error -> {subscribeCallback.onError(error);}
+                        subscribeCallback::onNext,  // nextEvent -> {subscribeCallback.onNext(nextEvent);}
+                        subscribeCallback::onError, // error -> {subscribeCallback.onError(error);}
                         subscribeCallback::onComplete);
     }
 
-    protected abstract Flowable<String> buildObservable(String filePath);
+    protected abstract Flowable<String> buildObservable(File file);
 
 }

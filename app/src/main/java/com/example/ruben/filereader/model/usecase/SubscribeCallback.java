@@ -1,4 +1,4 @@
-package com.example.ruben.filereader.presenter;
+package com.example.ruben.filereader.model.usecase;
 
 public interface SubscribeCallback {
 

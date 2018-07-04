@@ -6,6 +6,15 @@ def rxAndroidVersion = '2.0.1'
 def daggerVersion = '2.8'
 def butterKnifeVersion = '8.8.1'
 
+def jUnitVersion = '4.12'
+def testRunnerVersion = '1.0.2'
+def espressoVersion = '3.0.2'
+def mockitoVersion = '1.9.5'
+def robolectricVersion = '3.5.1'
+def robolectricVersionShadows = '3.3.2'
+def daggerMockVersion = '0.8.2'
+
+
 
 android {
     compileSdkVersion 27
@@ -35,6 +44,8 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     implementation "com.android.support:appcompat-v7:${supportVersion}"
 
+    implementation "commons-io:commons-io:+"
+
     implementation "com.android.support:recyclerview-v7:${supportVersion}"
 
     implementation "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
@@ -46,7 +57,11 @@ dependencies {
     implementation "com.google.dagger:dagger:${daggerVersion}"
     annotationProcessor "com.google.dagger:dagger-compiler:${daggerVersion}"
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    testImplementation "org.mockito:mockito-core:${mockitoVersion}"
+    testImplementation "org.robolectric:robolectric:${robolectricVersion}"
+    testImplementation "org.robolectric:shadows-support-v4:${robolectricVersionShadows}"
+
+    testImplementation "junit:junit:${jUnitVersion}"
+    androidTestImplementation "com.android.support.test:runner:${testRunnerVersion}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:${espressoVersion}"
 }

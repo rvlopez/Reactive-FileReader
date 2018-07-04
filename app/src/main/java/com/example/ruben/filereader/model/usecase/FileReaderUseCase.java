@@ -1,7 +1,8 @@
 package com.example.ruben.filereader.model.usecase;
 
 import com.example.ruben.filereader.model.repository.FileReaderRepository;
-import com.example.ruben.filereader.presenter.SubscribeCallback;
+
+import java.io.File;
 
 import javax.inject.Inject;
 
@@ -19,12 +20,12 @@ public class FileReaderUseCase extends Interactor {
         this.fileReaderRepository = fileReaderRepository;
     }
 
-    public void execute(String filePath, SubscribeCallback subscribeCallback) {
-        super.execute(filePath, subscribeCallback);
+    public void execute(File file, SubscribeCallback subscribeCallback) {
+        super.execute(file, subscribeCallback);
     }
 
     @Override
-    protected Flowable<String> buildObservable(String filePath) {
-        return fileReaderRepository.readFIle(filePath);
+    protected Flowable<String> buildObservable(File file) {
+        return fileReaderRepository.readFIle(file);
     }
 }

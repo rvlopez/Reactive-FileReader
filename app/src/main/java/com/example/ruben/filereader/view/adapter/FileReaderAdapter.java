@@ -46,6 +46,7 @@ public class FileReaderAdapter extends RecyclerView.Adapter<FileReaderAdapter.Vi
 
     public void setWordsMap(Map<String, Integer> wordsMap) {
         this.wordsMap = wordsMap;
+        notifyDataSetChanged();
     }
 
     private Map.Entry<String, Integer> getEntry(int position) {
