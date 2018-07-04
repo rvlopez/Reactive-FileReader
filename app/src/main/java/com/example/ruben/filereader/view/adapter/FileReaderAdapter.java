@@ -35,7 +35,7 @@ public class FileReaderAdapter extends RecyclerView.Adapter<FileReaderAdapter.Vi
 
         if (entry != null) {
             holder.word.setText(entry.getKey());
-            holder.quantity.setText(entry.getValue());
+            holder.quantity.setText(entry.getValue().toString());
         }
     }
 

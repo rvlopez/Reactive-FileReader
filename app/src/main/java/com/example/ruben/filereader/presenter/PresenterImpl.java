@@ -7,6 +7,7 @@ import com.example.ruben.filereader.view.FileReaderView;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class PresenterImpl extends Presenter<FileReaderView> implements SubscribeCallback {
 
@@ -24,7 +25,7 @@ public class PresenterImpl extends Presenter<FileReaderView> implements Subscrib
     }
 
     private void initializeMap() {
-         wordsMap = new HashMap<>();
+         wordsMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
     }
 
     @Override
