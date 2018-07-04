@@ -47,12 +47,11 @@ public class PresenterImpl extends Presenter<FileReaderView> implements Subscrib
         if (wordsMap.size() == 0) {
             wordsMap.put(word, 1);
         } else {
-            for (Map.Entry<String, Integer> entry : wordsMap.entrySet()) {
-                if (entry.getKey().equalsIgnoreCase(word)) {
-                    entry.setValue(entry.getValue() + 1);
-                } else {
-                    wordsMap.put(word, 1);
-                }
+            if (wordsMap.containsKey(word)) {
+                Integer integer = wordsMap.get(word);
+                wordsMap.put(word, ++integer);
+            } else {
+                wordsMap.put(word, 1);
             }
         }
     }

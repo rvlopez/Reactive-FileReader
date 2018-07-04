@@ -6,6 +6,7 @@ import java.io.FileReader;
 
 import javax.inject.Inject;
 
+import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 
 public class FileReaderDataSource {
@@ -15,20 +16,18 @@ public class FileReaderDataSource {
     }
 
     public Flowable<String> read(File file) {
-        return Flowable.generate(
-                () -> new BufferedReader(new FileReader(file)),
-                (reader, emitter) -> {
-                    final String line = reader.readLine();
-                    if (line != null) {
-                        String[] splitted = line.split("\\s+");
-                        for (String word : splitted) {
-                            emitter.onNext(word);
-                        }
-                    } else {
-                        emitter.onComplete();
-                    }
-                },
-                BufferedReader::close
-        );
+        return Flowable.create(emitter -> {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            final String line = bufferedReader.readLine();
+            if (line != null) {
+                String[] splitted = line.split("\\s+");
+                for (String word : splitted) {
+                    emitter.onNext(word);
+                }
+                emitter.onComplete();
+            } else {
+                emitter.onComplete();
+            }
+        }, BackpressureStrategy.BUFFER);
     }
 }
