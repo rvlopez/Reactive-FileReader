@@ -5,7 +5,6 @@ import com.example.ruben.filereader.model.usecase.SubscribeCallback;
 import com.example.ruben.filereader.view.FileReaderView;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
