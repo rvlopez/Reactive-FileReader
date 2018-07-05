@@ -20,6 +20,7 @@ public class FileReaderAdapter extends RecyclerView.Adapter<FileReaderAdapter.Vi
     private Map<String, Integer> wordsMap;
 
     @Inject public FileReaderAdapter() {
+        setHasStableIds(true);
     }
 
     @Override
@@ -42,6 +43,11 @@ public class FileReaderAdapter extends RecyclerView.Adapter<FileReaderAdapter.Vi
     @Override
     public int getItemCount() {
         return wordsMap.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return getEntry(position).getValue();
     }
 
     public void setWordsMap(Map<String, Integer> wordsMap) {
