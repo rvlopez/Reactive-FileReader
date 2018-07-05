@@ -1,5 +1,6 @@
 package com.example.ruben.filereader.view.activity;
 
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -44,6 +45,11 @@ public class MainActivity extends RootActivity implements FileReaderView {
         recyclerView.setVisibility(View.GONE);
         showNoResults.setVisibility(View.VISIBLE);
         showNoResults.setText(error.getMessage());
+    }
+
+    @Override
+    public void dataLoadedComplete() {
+        Snackbar.make(recyclerView, R.string.snackbar_message, Snackbar.LENGTH_LONG).show();
     }
 
     @Override

@@ -47,7 +47,11 @@ public class FileReaderAdapter extends RecyclerView.Adapter<FileReaderAdapter.Vi
 
     @Override
     public long getItemId(int position) {
-        return getEntry(position).getValue();
+        if (getEntry(position) != null) {
+            return getEntry(position).getValue();
+        } else {
+            return 0;
+        }
     }
 
     public void setWordsMap(Map<String, Integer> wordsMap) {

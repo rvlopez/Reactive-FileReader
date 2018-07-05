@@ -3,4 +3,5 @@
 
     <string name="light_file">Load light file</string>
     <string name="heavy_file">Load heavy file</string>
+    <string name="snackbar_message">File reading has finished.</string>
 </resources>

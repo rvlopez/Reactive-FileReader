@@ -7,4 +7,6 @@ public interface FileReaderView extends IView {
     void showData(Map<String, Integer> wordsMap);
 
     void showError(Throwable error);
+
+    void dataLoadedComplete();
 }

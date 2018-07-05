@@ -40,7 +40,7 @@ public class PresenterImpl extends Presenter<FileReaderView> implements Subscrib
 
     @Override
     public void onComplete() {
-        // File read is complete
+       view.dataLoadedComplete();
     }
 
     private void updateMap(String word) {
