@@ -37,7 +37,7 @@ public class MainActivity extends RootActivity implements FileReaderView {
     public void showData(Map<String, Integer> wordsMap) {
         showNoResults.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
-        adapter.setWordsMap(wordsMap);
+        adapter.setMapKeyArray(wordsMap, wordsMap.keySet().toArray());
     }
 
     @Override

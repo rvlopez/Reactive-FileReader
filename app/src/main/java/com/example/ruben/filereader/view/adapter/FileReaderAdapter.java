@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 public class FileReaderAdapter extends RecyclerView.Adapter<FileReaderAdapter.ViewHolder> {
 
     private Map<String, Integer> wordsMap;
+    private Object[] keySetArray;
 
     @Inject public FileReaderAdapter() {
         setHasStableIds(true);
@@ -32,12 +33,9 @@ public class FileReaderAdapter extends RecyclerView.Adapter<FileReaderAdapter.Vi
 
     @Override
     public void onBindViewHolder(FileReaderAdapter.ViewHolder holder, int position) {
-        Map.Entry<String, Integer> entry = getEntry(position);
-
-        if (entry != null) {
-            holder.word.setText(entry.getKey());
-            holder.quantity.setText(entry.getValue().toString());
-        }
+        String key = keySetArray[position].toString();
+        holder.word.setText(key);
+        holder.quantity.setText(String.valueOf(wordsMap.get(key)));
     }
 
     @Override
@@ -54,8 +52,9 @@ public class FileReaderAdapter extends RecyclerView.Adapter<FileReaderAdapter.Vi
         }
     }
 
-    public void setWordsMap(Map<String, Integer> wordsMap) {
+    public void setMapKeyArray(Map<String, Integer> wordsMap, Object[] keySetArray) {
         this.wordsMap = wordsMap;
+        this.keySetArray = keySetArray;
         notifyDataSetChanged();
     }
 

@@ -20,7 +20,7 @@ public class FileReaderDataSource {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             final String line = bufferedReader.readLine();
             if (line != null) {
-                String[] splitted = line.split("\\s+");
+                String[] splitted = line.split("[\\p{Punct}\\s]+");
                 for (String word : splitted) {
                     Thread.sleep(1000);
                     emitter.onNext(word);
